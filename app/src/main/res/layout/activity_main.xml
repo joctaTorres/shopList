@@ -88,6 +88,35 @@
                 android:padding="12dp" />
         </LinearLayout>
 
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+           <Button
+                   android:paddingStart="16dp"
+                   android:drawableLeft="@drawable/ic_photo_camera_black_24dp"
+                   android:text="Camera"
+                   android:layout_marginRight="8dp"
+                   android:background="@drawable/roundedbutton"
+                   android:layout_weight="1"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"/>
+
+           <Button
+                   android:paddingStart="16dp"
+                   android:drawableLeft="@drawable/ic_barcode_black"
+                   android:layout_marginLeft="8dp"
+                   android:background="@drawable/roundedbutton"
+                   android:text="Barcode"
+                   android:layout_weight="1"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
