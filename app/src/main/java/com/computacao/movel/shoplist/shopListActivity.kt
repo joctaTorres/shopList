@@ -20,6 +20,7 @@ class shopListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_list)
+        setTitle("Criando uma lista")
 
         addItemButton.setOnClickListener {
             var intent = Intent(this, MainActivity::class.java)
