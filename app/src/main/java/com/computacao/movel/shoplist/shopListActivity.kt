@@ -7,10 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_shop_list.*
+import kotlinx.android.synthetic.main.list_row.view.*
 
 class shopListActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,13 +20,27 @@ class shopListActivity : AppCompatActivity() {
         itemsList.adapter = ListAdapter(this)
     }
 
-    fun finshList(view : View) {
-
-    }
-
     private class ListAdapter(ctx : Context) : BaseAdapter() {
 
         private val context : Context
+
+        private var itensList = arrayOf(
+            hashMapOf(
+                "itemName" to "Macarrão",
+                "itemPrice" to 3.28f,
+                "itemQnt" to 3
+            ),
+            hashMapOf(
+                "itemName" to "Feijão",
+                "itemPrice" to 2.48f,
+                "itemQnt" to 5
+            ),
+            hashMapOf(
+                "itemName" to "Arroz",
+                "itemPrice" to 1.28f,
+                "itemQnt" to 2
+            )
+        )
 
         init {
             context = ctx
@@ -35,15 +50,22 @@ class shopListActivity : AppCompatActivity() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val inflater = LayoutInflater.from(context)
             val row = inflater.inflate(R.layout.list_row, parent, false)
-            return row
 
-            // val textView = TextView(context)
-            // textView.text = "ITEM TEXT"
-            // return textView
+            val itemMap = getItem(position) as Map<String, Any>
+            val price = itemMap.get("itemPrice") as Float
+            val quantity = itemMap.get("itemQnt") as Int
+            val totalItem = price * quantity.toFloat()
+
+            row.itemName.text = "${itemMap.get("itemName")}"
+            row.itemPrice.text = "Preço R$${price}"
+            row.itemQnt.text = "Quantidade ${quantity}"
+            row.itemTotal.text = "Total R$ ${totalItem}"
+
+            return row
         }
 
         override fun getItem(position: Int): Any {
-            return "COOL LIST TEXT"
+            return  itensList.get(position)
         }
 
         override fun getItemId(position: Int): Long {
@@ -52,7 +74,7 @@ class shopListActivity : AppCompatActivity() {
 
         // responsible for how many rows in list
         override fun getCount(): Int {
-            return 10
+            return itensList.size
         }
 
     }
