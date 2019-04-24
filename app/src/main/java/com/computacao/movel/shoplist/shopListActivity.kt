@@ -23,7 +23,7 @@ class shopListActivity : AppCompatActivity() {
         setTitle("Criando uma lista")
 
         addItemButton.setOnClickListener {
-            var intent = Intent(this, MainActivity::class.java)
+            var intent = Intent(this, addItemActivity::class.java)
             startActivityForResult(intent, ITEM_REQUEST_CODE)
         }
     }

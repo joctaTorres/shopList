@@ -9,7 +9,7 @@ import android.provider.MediaStore
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class addItemActivity : AppCompatActivity() {
 
     val CAMERA_REQUEST_CODE = 0
 
