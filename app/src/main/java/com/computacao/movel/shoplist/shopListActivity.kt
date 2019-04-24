@@ -9,22 +9,21 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import kotlinx.android.synthetic.main.activity_shop_list.*
 import kotlinx.android.synthetic.main.list_row.view.*
+import kotlin.collections.HashMap
 
 class shopListActivity : AppCompatActivity() {
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_list)
-
-        itemsList.adapter = ListAdapter(this)
     }
 
-    private class ListAdapter(ctx : Context) : BaseAdapter() {
+    override fun onResume() {
+        super.onResume()
 
-        private val context : Context
-
-        private var itensList = arrayOf(
+        var listItens = arrayOf(
             hashMapOf(
                 "itemName" to "Macarrão",
                 "itemPrice" to 3.28f,
@@ -41,9 +40,27 @@ class shopListActivity : AppCompatActivity() {
                 "itemQnt" to 2
             )
         )
+        itemsList.adapter = ListAdapter(this, listItens)
+        var listTotalValue = getTotalValueFromList(listItens)
+        listTotal.text = "Total R$ ${listTotalValue}"
+    }
+
+    private fun getTotalValueFromList(listItens: Array<HashMap<String, Any>>): Float {
+        return listItens.fold(0f) {
+                total, item -> total + ((item.get("itemPrice") as Float) * ((item.get("itemQnt") as Int).toFloat()))
+        }
+    }
+
+
+    private class ListAdapter(ctx: Context, items: Array<HashMap<String, Any>>) : BaseAdapter() {
+
+        private val context : Context
+        private val itemsList : Array<HashMap<String, Any>>
+
 
         init {
             context = ctx
+            itemsList = items
         }
 
         // responsible for rendering each row
@@ -65,7 +82,7 @@ class shopListActivity : AppCompatActivity() {
         }
 
         override fun getItem(position: Int): Any {
-            return  itensList.get(position)
+            return  itemsList.get(position)
         }
 
         override fun getItemId(position: Int): Long {
@@ -74,7 +91,7 @@ class shopListActivity : AppCompatActivity() {
 
         // responsible for how many rows in list
         override fun getCount(): Int {
-            return itensList.size
+            return itemsList.size
         }
 
     }
