@@ -16,7 +16,7 @@ class startScreen : AppCompatActivity() {
             startActivity(intentProcurarListasCriadas)
         }
         button2.setOnClickListener {
-            val intentCriarNovaLista = Intent(this, startScreen::class.java)       /*Trocar activity*/
+            val intentCriarNovaLista = Intent(this, shopListActivity::class.java)       /*Trocar activity*/
             startActivity(intentCriarNovaLista)
         }
     }
