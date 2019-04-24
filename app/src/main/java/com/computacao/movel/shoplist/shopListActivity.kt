@@ -1,6 +1,7 @@
 package com.computacao.movel.shoplist
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,11 +14,17 @@ import kotlin.collections.HashMap
 
 class shopListActivity : AppCompatActivity() {
 
+    private val ITEM_REQUEST_CODE = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_list)
+
+        addItemButton.setOnClickListener {
+            var intent = Intent(this, MainActivity::class.java)
+            startActivityForResult(intent, ITEM_REQUEST_CODE)
+        }
     }
 
     override fun onResume() {
