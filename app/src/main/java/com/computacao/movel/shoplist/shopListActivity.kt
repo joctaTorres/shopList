@@ -19,6 +19,10 @@ class shopListActivity : AppCompatActivity() {
         itemsList.adapter = ListAdapter(this)
     }
 
+    fun finshList(view : View) {
+
+    }
+
     private class ListAdapter(ctx : Context) : BaseAdapter() {
 
         private val context : Context
@@ -48,7 +52,7 @@ class shopListActivity : AppCompatActivity() {
 
         // responsible for how many rows in list
         override fun getCount(): Int {
-            return 5
+            return 10
         }
 
     }
