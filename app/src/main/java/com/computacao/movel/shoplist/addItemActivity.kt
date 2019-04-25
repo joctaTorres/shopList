@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.add_item.*
 class addItemActivity : AppCompatActivity() {
 
     val CAMERA_REQUEST_CODE = 0
+    var IMAGE_BITMAP : Bitmap? = null
     companion object {
         val ITEM_RESULT_EXTRA : String = "itemMapResult"
     }
@@ -46,7 +47,8 @@ class addItemActivity : AppCompatActivity() {
         var addedItem = hashMapOf(
             "itemName" to itemName.text.toString(),
             "itemPrice" to priceValue,
-            "itemQnt" to quantityValue
+            "itemQnt" to quantityValue,
+            "itemImg" to IMAGE_BITMAP
         )
 
         val addItemIntent = Intent()
@@ -62,8 +64,9 @@ class addItemActivity : AppCompatActivity() {
         when(requestCode) {
             CAMERA_REQUEST_CODE -> {
                 if (resultCode == Activity.RESULT_OK && data != null) {
+                    IMAGE_BITMAP = data.extras.get("data") as Bitmap
                     groceryImage.setImageBitmap(
-                        data.extras.get("data") as Bitmap
+                        IMAGE_BITMAP
                     )
                 }
             }

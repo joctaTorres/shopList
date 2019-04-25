@@ -3,6 +3,7 @@ package com.computacao.movel.shoplist
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -84,11 +85,18 @@ class shopListActivity : AppCompatActivity() {
             val price = itemMap.get("itemPrice") as Float
             val quantity = itemMap.get("itemQnt") as Int
             val totalItem = price * quantity.toFloat()
+            val image = itemMap.get("itemImg") as Bitmap?
 
             row.itemName.text = "${itemMap.get("itemName")}"
             row.itemPrice.text = "Preço R$${price}"
             row.itemQnt.text = "Quantidade ${quantity}"
             row.itemTotal.text = "Total R$ ${totalItem}"
+
+            if (image != null) {
+                row.itemImage.setImageBitmap(
+                    image
+                )
+            }
 
             return row
         }
