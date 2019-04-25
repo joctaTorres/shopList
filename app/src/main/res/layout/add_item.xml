@@ -53,7 +53,7 @@
                 android:layout_height="60dp"
                 android:hint="Nome do Produto"
                 android:inputType="text"
-                android:padding="12dp" android:id="@+id/ItemName"/>
+                android:padding="12dp" android:id="@+id/itemName"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
