@@ -10,6 +10,11 @@ import android.widget.Toast
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.add_item.*
+import com.google.android.gms.common.util.IOUtils.toByteArray
+import android.R.attr.bitmap
+import android.util.Base64
+import java.io.ByteArrayOutputStream
+
 
 class addItemActivity : AppCompatActivity() {
 
@@ -47,11 +52,16 @@ class addItemActivity : AppCompatActivity() {
         val priceValue = itemPrice.text.toString().toFloat()
         val quantityValue = itemQnt.text.toString().toInt()
 
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        IMAGE_BITMAP!!.compress(Bitmap.CompressFormat.PNG, 25, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        val encoded = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
         var addedItem = hashMapOf(
             "itemName" to itemName.text.toString(),
             "itemPrice" to priceValue,
             "itemQnt" to quantityValue,
-            "itemImg" to IMAGE_BITMAP
+            "itemImg" to encoded
         )
 
         val addItemIntent = Intent()

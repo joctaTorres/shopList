@@ -17,6 +17,9 @@ import kotlinx.android.synthetic.main.activity_shop_list.*
 import kotlinx.android.synthetic.main.list_row.view.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import android.graphics.BitmapFactory
+import android.util.Base64
+
 
 class shopListActivity : AppCompatActivity() {
 
@@ -51,6 +54,7 @@ class shopListActivity : AppCompatActivity() {
     }
 
     private fun saveShoppingListAndFinish() {
+
         var listName = listName.text!!
 
         if (listItens.size <= 0) {
@@ -131,17 +135,17 @@ class shopListActivity : AppCompatActivity() {
             val price = itemMap.get("itemPrice") as Float
             val quantity = itemMap.get("itemQnt") as Int
             val totalItem = price * quantity.toFloat()
-            val image = itemMap.get("itemImg") as Bitmap?
+            val imageBase64 = itemMap.get("itemImg") as String
 
             row.itemName.text = "${itemMap.get("itemName")}"
             row.itemPrice.text = "Preço R$${price}"
             row.itemQnt.text = "Quantidade ${quantity}"
             row.itemTotal.text = "Total R$ ${totalItem}"
 
-            if (image != null) {
-                row.itemImage.setImageBitmap(
-                    image
-                )
+            if (imageBase64 != null) {
+                val decodedString = Base64.decode(imageBase64, Base64.DEFAULT)
+                val image : Bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                row.itemImage.setImageBitmap(image)
             }
 
             return row
