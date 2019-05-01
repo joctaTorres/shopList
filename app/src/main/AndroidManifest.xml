@@ -9,30 +9,30 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
+        <activity android:name=".AllShoppingLists">
+        </activity>
         <activity
                 android:name=".shopListActivity"
-                android:windowSoftInputMode="adjustPan"
-                android:parentActivityName=".startScreen" >
+                android:parentActivityName=".startScreen"
+                android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".startScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <activity android:name=".addItemActivity"
-                  android:parentActivityName=".shopListActivity">
+        <activity
+                android:name=".addItemActivity"
+                android:parentActivityName=".shopListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
