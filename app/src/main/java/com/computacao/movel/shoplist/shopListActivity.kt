@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Toast
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_shop_list.*
 import kotlinx.android.synthetic.main.list_row.view.*
 import kotlin.collections.ArrayList
@@ -20,7 +22,10 @@ class shopListActivity : AppCompatActivity() {
 
     private val ITEM_REQUEST_CODE = 1
     private var listItens = ArrayList<HashMap<String, Any>>()
+    private var listTotalValue: Float = 0.0f
 
+    val storage : DatabaseReference =
+        FirebaseDatabase.getInstance().reference.child("Lists")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +36,54 @@ class shopListActivity : AppCompatActivity() {
             var intent = Intent(this, addItemActivity::class.java)
             startActivityForResult(intent, ITEM_REQUEST_CODE)
         }
+
+        finishButton.setOnClickListener {
+            try {
+                saveShoppingListAndFinish()
+            } catch (e: Exception) {
+                Toast.makeText(
+                    this,
+                    "Não foi possível salvar a lista",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun saveShoppingListAndFinish() {
+        var listName = listName.text!!
+
+        if (listItens.size <= 0) {
+            Toast.makeText(
+                this,
+                "Não é possível salvar uma lista vazia",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        if (listName.isBlank()) {
+            Toast.makeText(
+                this,
+                "Não é possível salvar uma lista sem nome",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        storage.push().setValue(
+            List(listName.toString(), listItens, listTotalValue)
+        )
+        Toast.makeText(this, "Lista salva com sucesso", Toast.LENGTH_SHORT).show()
+
+        finish()
     }
 
     override fun onResume() {
         super.onResume()
 
         itemsList.adapter = ListAdapter(this, listItens)
-        var listTotalValue = getTotalValueFromList(listItens)
+        listTotalValue = getTotalValueFromList(listItens)
         listTotal.text = "Total R$ ${listTotalValue}"
     }
 

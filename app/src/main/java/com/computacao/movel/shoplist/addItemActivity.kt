@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.add_item.*
 
 class addItemActivity : AppCompatActivity() {
@@ -16,6 +18,7 @@ class addItemActivity : AppCompatActivity() {
     companion object {
         val ITEM_RESULT_EXTRA : String = "itemMapResult"
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
