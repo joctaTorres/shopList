@@ -30,7 +30,7 @@
                     android:imeOptions="actionSend"
                     android:fontFamily="sans-serif-light"
                     android:textStyle="italic"
-                    android:textColorHint="@android:color/white"/>
+                    android:textColorHint="@android:color/white" android:id="@+id/listName"/>
         </android.support.design.widget.TextInputLayout>
     </android.support.constraint.ConstraintLayout>
     <View
@@ -86,7 +86,7 @@
                 android:text="Encerrar compra"
                 android:drawableEnd="@drawable/ic_done_black_24dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/button3"
+                android:layout_height="wrap_content" android:id="@+id/finishButton"
                 style="?android:attr/borderlessButtonStyle"
                 android:textColor="@android:color/white" android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"

@@ -7,14 +7,23 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.add_item.*
+import com.google.android.gms.common.util.IOUtils.toByteArray
+import android.R.attr.bitmap
+import android.util.Base64
+import java.io.ByteArrayOutputStream
+
 
 class addItemActivity : AppCompatActivity() {
 
     val CAMERA_REQUEST_CODE = 0
+    var IMAGE_BITMAP : Bitmap? = null
     companion object {
         val ITEM_RESULT_EXTRA : String = "itemMapResult"
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +52,16 @@ class addItemActivity : AppCompatActivity() {
         val priceValue = itemPrice.text.toString().toFloat()
         val quantityValue = itemQnt.text.toString().toInt()
 
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        IMAGE_BITMAP!!.compress(Bitmap.CompressFormat.PNG, 25, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        val encoded = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
         var addedItem = hashMapOf(
             "itemName" to itemName.text.toString(),
             "itemPrice" to priceValue,
-            "itemQnt" to quantityValue
+            "itemQnt" to quantityValue,
+            "itemImg" to encoded
         )
 
         val addItemIntent = Intent()
@@ -62,8 +77,9 @@ class addItemActivity : AppCompatActivity() {
         when(requestCode) {
             CAMERA_REQUEST_CODE -> {
                 if (resultCode == Activity.RESULT_OK && data != null) {
+                    IMAGE_BITMAP = data.extras.get("data") as Bitmap
                     groceryImage.setImageBitmap(
-                        data.extras.get("data") as Bitmap
+                        IMAGE_BITMAP
                     )
                 }
             }
