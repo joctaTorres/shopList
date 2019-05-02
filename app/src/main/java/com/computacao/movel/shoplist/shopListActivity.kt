@@ -19,6 +19,8 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import android.graphics.BitmapFactory
 import android.util.Base64
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class shopListActivity : AppCompatActivity() {
@@ -74,9 +76,10 @@ class shopListActivity : AppCompatActivity() {
             ).show()
             return
         }
+        var dateFormat = SimpleDateFormat("dd/MM/yyyy")
 
         storage.push().setValue(
-            List(listName.toString(), listItens, listTotalValue)
+            List(listName.toString(), listItens, listTotalValue, dateFormat.format(Date()))
         )
         Toast.makeText(this, "Lista salva com sucesso", Toast.LENGTH_SHORT).show()
 

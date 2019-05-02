@@ -1,18 +1,21 @@
 package com.computacao.movel.shoplist
 
 import java.util.*
+import kotlin.collections.HashMap
 
 class List {
-    var Name : String
-    var Items : ArrayList<HashMap<String, Any>>
-    var TotalPrice : Float = 0.0f
-    var shopDate : Date
+    var name : String
+    var items : ArrayList<HashMap<String, Any>>
+    var totalPrice : Float = 0.0f
+    var shopDate : String
 
-    constructor(Name: String, Items: ArrayList<HashMap<String, Any>>, TotalPrice: Float) {
-        this.Name = Name
-        this.Items = Items
-        this.TotalPrice = TotalPrice
-        this.shopDate = Date()
+    constructor(name: String, items: ArrayList<HashMap<String, Any>>, totalPrice: Float, shopDate: String) {
+        this.name = name
+        this.items = items
+        this.totalPrice = totalPrice
+        this.shopDate = shopDate
     }
+
+    constructor() : this("", arrayListOf<HashMap<String, Any>>(), 0f, "") {}
 
 }
