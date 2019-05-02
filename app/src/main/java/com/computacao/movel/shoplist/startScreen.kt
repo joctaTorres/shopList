@@ -10,6 +10,7 @@ class startScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_screen)
+        setTitle("Shopping List")
 
         button.setOnClickListener {
             val intentProcurarListasCriadas = Intent(this, AllShoppingLists::class.java)
