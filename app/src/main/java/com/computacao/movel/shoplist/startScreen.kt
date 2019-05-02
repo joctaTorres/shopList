@@ -12,7 +12,7 @@ class startScreen : AppCompatActivity() {
         setContentView(R.layout.start_screen)
 
         button.setOnClickListener {
-            val intentProcurarListasCriadas = Intent(this, startScreen::class.java) /*Trocar activity*/
+            val intentProcurarListasCriadas = Intent(this, AllShoppingLists::class.java) /*Trocar activity*/
             startActivity(intentProcurarListasCriadas)
         }
         button2.setOnClickListener {
