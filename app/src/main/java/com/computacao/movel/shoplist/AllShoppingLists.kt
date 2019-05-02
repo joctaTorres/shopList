@@ -1,6 +1,7 @@
 package com.computacao.movel.shoplist
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -39,6 +40,10 @@ class AllShoppingLists : AppCompatActivity() {
             }
         })
 
+        addListButton.setOnClickListener {
+            val newListIntent = Intent(this, shopListActivity::class.java)
+            startActivity(newListIntent)
+        }
     }
 
     override fun onResume() {
